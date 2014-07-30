@@ -12,6 +12,7 @@ public partial class Home : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //test for git hub
         //<add name="PingBoardConString" connectionString="Data Source=.;Initial Catalog=PingBoard;Integrated Security=True" providerName="System.Data.SqlClient"/>
         BoardLogin.checkMasterlogin();
         if (!IsPostBack)
@@ -22,7 +23,7 @@ public partial class Home : System.Web.UI.Page
             string pf = (string)Session["PF"];
             string hash = (string)Session["Hash"];
             string creat = (string)Session["Created"];
-
+            
             if (ID != null)
             {
                 DataTable dt1 = BoardAccess.GetBoard("0", BoardLogin.getid(), "GetBoardID", "True", "True", ID);
