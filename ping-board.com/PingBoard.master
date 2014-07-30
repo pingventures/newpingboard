@@ -1,0 +1,991 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="PingBoard.master.cs" Inherits="PingBoard" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>PingBoard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>    
+     <link rel="icon" type="image/ico" href="http://ping-board.com/images/logo-icon.ico"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/demo.css" rel="stylesheet" type="text/css" />
+    <script src="js/browserclose.js"></script>
+    <style type="text/css">
+        .error-area{ position:relative; top:0px; width:80%;margin-right:auto; height:20px; padding:5px; text-align:center; font-size:11px; color:#fff; z-index:1000; }
+        .success, .error{border: 1px solid;}
+        .success {color: #4F8A10;background-color: #DFF2BF;}
+        .error {color: #D8000C;background-color: #FFBABA;}
+        .textbox{
+            background: white;
+            border: 1px solid #DDD;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #DDD inset;
+            color: #666;
+            float: left;
+            padding: 5px 10px;
+            width: 165px;
+            outline: none;
+        }
+        
+        .bluebtn{
+            background: #25A6E1;
+            background: -moz-linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#25A6E1),color-stop(100%,#188BC0));
+            background: -webkit-linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+            background: -o-linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+            background: -ms-linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+            background: linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+            filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
+            padding: 8px 12px;
+            color: #fff;
+            font-family: 'Helvetica Neue' ,sans-serif;
+            font-size: 14px;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border: 1px solid #1A87B9;
+        }
+        .platform-list{
+            width: 150px;
+            margin: 5px 0px 0px 0px;
+            display: none;
+            position: absolute;
+            left: 100px;
+        }
+        .platform{
+            width: 150px;
+        }
+        .platform img{
+            float: left;
+        }
+        .platform span{
+            float: right;
+        }        
+        .createboard
+        {
+            position: absolute;
+            top: 130px;
+            left: 220px;
+            width: 150px;
+            padding: 5px;
+            height: 60px;
+            background: rgba(69,156,175,.6);
+            border: 1px solid #fff;
+            display: none;
+        }
+        .myboard
+        {
+            position: absolute;
+            top: 180px;
+            left: 220px;
+            width: 150px;
+            font-size:13px;
+            padding: 5px;
+            color: #fff;
+            height: 80px;
+            background: rgba(69,156,175,.6);
+            border: 1px solid #fff;
+            display: none;
+            overflow:auto;
+        }
+        .addhastag{
+            position: absolute;
+            top: 230px;
+            left: 220px;
+            width: 150px;
+            padding: 5px;
+            height: 60px;
+            background: rgba(69,156,175,.6);
+            border: 1px solid #fff;
+            display: none;
+        }
+        .sortbyplatform
+        {
+            position: absolute;
+            top: 280px;
+            left: 220px;
+            width: 50px;
+            padding: 5px;
+            height: 180px;
+            background: rgba(69,156,175,.6);
+            border: 1px solid #fff;
+            display: none;
+        }
+        .sortbyformat
+        {
+            position: absolute;
+            top: 335px;
+            left: 220px;
+            width: 50px;
+            padding: 5px;
+            height: 160px;
+            background: rgba(69,156,175,.6);
+            border: 1px solid #fff;
+            display: none;
+        }                    
+        .randomiser
+        {
+            position: absolute;
+            top: 435px;
+            left: 220px;
+            width: 100px;
+            padding: 5px;
+            height: 60px;
+            background: rgba(69,156,175,.6);
+            border: 1px solid #fff;
+            display: none;
+            color:#fff;
+            font-size:13px;
+            overflow:auto;
+        }
+        
+        .ca-icon1
+        {
+            display: none;
+        }
+        
+        
+          /* POP UP BOX STYLE  */
+        .boxpanel{ width:450px; 
+                   position:absolute; 
+                   top:30%; left:30%; 
+                   background:rgba(255,255,255,1); 
+                   z-index:1000;
+                   -webkit-box-shadow: 0 8px 6px -6px black;
+	               -moz-box-shadow: 0 8px 6px -6px black;
+	               box-shadow: 0 8px 6px -6px black;
+                   }
+        .boxpanel-header{ height:35px; width:450px; background:#314149;}
+         .boxpanel-header1{ height:35px; width:450px; background:#314149;}
+        .boxpanel-bottom{ width:430px; padding:10px;min-height:150px;}
+        .boxpanel-hed-txt {
+            float:left; 
+            font-size:13px;
+            font-weight:bold; 
+            color:#fff; 
+            padding:9px 5px 5px 15px;
+            }
+
+             .boxpanel-hed-txt1 {
+            float:left; 
+            font-size:13px;
+            font-weight:bold; 
+            color:#fff; 
+            padding:9px 5px 5px 15px;
+            }
+        .box-close-btn{float:right; height:35px; padding:5px 5px 5px 5px; width:20px; cursor:pointer;}
+        .boxpanel-bottom-panel{ width:430px; height:50px;}
+        .boxpanel-bottom-left{float:left; margin:10px 5px 0px 5px; width:110px; color:#0975ab; font-size:15px; font-weight:bold;}
+        .boxpanel-bottom-right{ float:right; width:290px; margin:10px 10px 0px 10px;}
+        
+        .add-social-box{ float:left; width:65px; margin:2px;}
+        
+        .boxpanel-bottom ul{ list-style:none; padding:0px; margin:0px;}
+        .boxpanel-bottom ul li{ width:400px; padding:10px; margin:5px; background:#c1dcea; height:30px; cursor:pointer;color:#0975ab;}
+        .boxpanel-bottom ul li img{ float:left; }
+        .boxpanel-bottom ul li span{ float:left; width:300px; padding-left:10px; padding-top:10px; font-size:14px;  font-weight:400;}
+        .boxpanel-bottom ul li span a{color:#0975ab;}
+        .boxpanel-bottom ul li span a:hover{ background:#0e3143; color:#fff;}
+        .boxpanel-bottom ul li:hover{ background:#0e3143; color:#fff;}
+        
+
+    .key   li{ width:400px !important; padding:10px; margin:5px; height:20px !important; cursor:pointer;color:#0975ab;}
+    .key  li span{ float:left; width:300px; padding-left:20px; padding-top:0px !important; font-size:14px !important;  font-weight:400;}
+    .key   li:hover{ background:rgba(77,155,194,.6); color:#fff;}
+            
+      .container{
+	
+	height:100%;
+	margin:0px;
+	padding:0px;}
+	
+	.key-del{ float:right; width:17px; height:20px;}
+	.key-list{ margin:0px; float:left; background:#d5dfe4; margin-bottom:10px; width:430px;}
+	.key-hed{  float:left; background:#425660;  width:420px; color:#fff; font-size:13px; font-weight:bold; padding:5px;}
+     .spinner {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;            
+            background: url(images/loading.gif) 50% 50% no-repeat rgba(248, 248, 248, 0.50);            
+            display:none;           
+        }
+        .main-header{
+             height:25px;
+             padding:5px 20px;
+             color:#fff;
+             font-size:12px;
+             z-index:1000;
+             text-align:center;
+             font-weight:bold;
+        }
+    .main-header span
+        { font-size:12px;
+        }
+.effect
+{
+      
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.effect:before, .effect:after
+{
+	content:"";
+ 
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+   
+ 
+} 
+.effect:after
+{
+
+    -webkit-transform:skew(8deg) rotate(3deg); 
+       -moz-transform:skew(8deg) rotate(3deg);     
+        -ms-transform:skew(8deg) rotate(3deg);     
+         -o-transform:skew(8deg) rotate(3deg); 
+            transform:skew(8deg) rotate(3deg);
+}
+  
+        
+    </style>
+
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="js/idle.js"></script>
+    <script type="text/javascript">
+        function checksession() {
+            var someSession = '<%= Session["ID"].ToString() %>';
+            if (someSession == null) {
+                window.location = "Default.aspx";
+            }
+        }
+        window.onload = checksession;
+        $(function () {
+            var awayCallback = function () {
+                //setMessage("away");
+                 PageMethods.AbandonSession(MethodRedirect); 
+                //MethodRedirect(1);
+            };            
+            var awayBackCallback = function () {                
+                //alert(new Date().toTimeString() + "  back");
+                //setMessage("back");
+            };
+            //var hiddenCallback = function() {
+            //	setMessage("User is not looking at page");
+            //};
+            //var visibleCallback = function(){
+            //	setMessage("User started looking at page again")
+            //};
+
+            var idle = new Idle({
+                //onHidden : hiddenCallback,
+                //onVisible : visibleCallback,
+                onAway: awayCallback,
+                onAwayBack: awayBackCallback,
+                awayTimeout: $('#Timeout').val() //away with default value of the textbox
+            }).start();
+
+            $('#Timeout').keydown(function (e) {
+                if (e.keyCode == 13) {
+
+                    var timeout = $(this).val();
+                   // setMessage("Timeout changed to: " + timeout);
+                    idle.setAwayTimeout(timeout);
+                }
+            })
+        });
+        function MethodRedirect(res) {
+           // alert("home page");
+            if (res == 1) {              
+                window.location="Default.aspx";
+            }
+        }
+
+    </script>   
+</head>
+<body>
+    <form id="form1" runat="server">   
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
+                <asp:HiddenField ID="Timeout" runat="server" Value="900000" />
+        <div class="spinner"></div>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.mylink').click(function () {
+                $('#popup-createborad,#popup-myboard,#popup-addhastag,#popup-shortbyplatform,#popup-shortbyformat,#popup-randomiser,#popup-Exclude').hide();
+                $(".spinner").show();
+            });
+
+            $('.right').click(function () {
+                $('#popup-createborad,#popup-myboard,#popup-addhastag,#popup-shortbyplatform,#popup-shortbyformat,#popup-randomiser,#popup-Exclude').hide();
+            });
+            $('.box-close-btn').click(function () {
+                $('#popup-createborad,#popup-myboard,#popup-addhastag,#popup-shortbyplatform,#popup-shortbyformat,#popup-randomiser,#popup-Exclude').hide();
+            });
+            $('.create-board-li').click(function () {
+                $('#popup-createborad').toggle("fast");
+                $('#popup-myboard,#popup-addhastag,#popup-shortbyplatform,#popup-shortbyformat,#popup-randomiser,#popup-Exclude').hide();
+            });
+            $('.my-board-li').click(function () {
+                $('#popup-myboard').toggle("fast");
+                $('#popup-createborad,#popup-addhastag,#popup-shortbyplatform,#popup-shortbyformat,#popup-randomiser,#popup-Exclude').hide();
+
+            });
+            $('.add-another-hastag').click(function () {
+                $('#popup-addhastag').toggle("fast");
+                $('#popup-myboard,#popup-createborad,#popup-shortbyplatform,#popup-shortbyformat,#popup-randomiser,#popup-Exclude').hide();
+
+            });
+            $('.sort-by-platform-li').click(function () {
+                $('#popup-shortbyplatform').toggle("slow");
+                $('#popup-myboard,#popup-addhastag,#popup-createborad,#popup-shortbyformat,#popup-randomiser,#popup-Exclude').hide();
+
+            });
+            $('.sort-by-format-li').click(function () {
+                $('#popup-shortbyformat').toggle("fast");
+                $('#popup-myboard,#popup-addhastag,#popup-shortbyplatform,#popup-createborad,#popup-randomiser,#popup-Exclude').hide();
+            });
+            $('.randomiser-li').click(function () {
+                $('#popup-randomiser').toggle("fast");
+                $('#popup-myboard,#popup-addhastag,#popup-shortbyplatform,#popup-shortbyformat,#popup-createborad,#popup-Exclude').hide();
+            });
+            $('.exclude-li').click(function () {
+                $('#popup-Exclude').toggle("fast");
+                $('#popup-myboard,#popup-addhastag,#popup-shortbyplatform,#popup-shortbyformat,#popup-createborad,#popup-randomiser').hide();
+            });
+            $(document).on('click', '.DelExclude', function () {
+                var r = confirm("Do You Want to Delete This KeyWord?");
+                if (r == true) {
+                    var KeyId = $(this).attr('alt');
+                    PageMethods.DelExclude(KeyId, OnDelExSucess);
+                }
+            });
+            function OnDelExSucess(res) {
+                if (res == "Fail") {
+                    $('#exResult').css('color', 'red');
+                    $('#exResult').text("HashTag Deletion Failed!");
+                } else {
+                    var trLen = $("#DataDel tr").length;
+                    if (trLen > 1) {
+                        $('#KI-' + res).parent().parent().remove();
+                    } else {
+                        $('#KI-' + res).remove();
+                    }
+                    $('#exResult').css('color', 'green');
+                    $('#exResult').text("HashTag Successfully Deleted!");
+                }
+            }
+            $('#Keyword').click(function () {
+                var val = $('#KeyText').val();
+                var txt = $('#MyboardName').text().split('-');
+                $('#exResult').css('color', 'red');
+                if (val.trim() == "") {
+                    $('#exResult').text("Fill Keyword Before Submit");
+                    return false;
+                } else {
+                    var check = "F";
+                    for (t in txt) {
+                        if (txt[t].toLowerCase() == val.trim().toLowerCase())
+                        {
+                            check = "T";
+                        }
+                    }
+                    if (check == "T") {
+                        $('#exResult').text("Can't Exclude Hashtag of Board Itself.");
+                    } else {                        
+                        PageMethods.AddExclude(val.trim(), OnExSuccess);
+                    }
+                    return false;
+                }
+            });
+            function OnExSuccess(res) {
+                if (!isNaN(res)) {
+                    var val = $('#KeyText').val();
+                    var trLen = $("#DataDel tr").length;                    
+                    if (trLen > 0) {
+                        var lastRow = $("#DataDel tr:last");
+                        var txt = "<tr><td><ul id='KI-" + res + "'><li><img src='images/popup-board-icon.png' alt='Board' /><span>" + val.trim() + "</span><a alt='" + res + "' class='DelExclude'><img src='images/delete-box-icon.png' alt='Delete Keyword' /></a></li></ul></td></tr>";
+                        lastRow.after(txt);
+                    }
+                    $('#KeyText').val("");
+                    $('#exResult').css('color', 'green');
+                    $('#exResult').text("Keyword Excluded Successfully");
+                } else {
+                    $('#exResult').css('color', 'green');
+                    $('#exResult').text(res);
+                }
+            }
+            $('#Button1').click(function () {
+                var val = $('#prBoard').val();
+                $('#crResult').css('color', 'red');
+                if (val.trim() == "") {
+                    $('#crResult').text("Fill Box Before Submit");
+                    return false;
+                } else {
+                    if (val.length < 3) {
+                        $('#crResult').text("Hashtag should contain atleast 3 characters.");
+                        return false;
+                    } else {
+                        if (!isNaN(val) || !isNaN(val.charAt(0))) {
+                            $('#crResult').text("Hashtag should not contain Or Start With Number");
+                            return false;
+                        } else {
+                            var pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //unacceptable chars
+                            if (pattern.test(val)) {
+                                $('#crResult').text("Hashtag Contains Special Characters");
+                                return false;
+                            } else {                                
+                                $('#crResult').text("Hashtag is Valid");
+                                $('#popup-createborad').hide();
+                                $(".spinner").show();
+                            }
+                        }
+                    }
+                }
+            });
+            $('#Button2').click(function () {
+                var val = $('#prExBoard').val();
+                $('#anResult').css('color', 'red');
+                if (val.trim() == "") {
+                    $('#anResult').text("Fill Box Before Submit");
+                    return false;
+                } else {
+                    if (val.length < 3) {
+                        $('#anResult').text("Hashtag should contain atleast 3 characters.");
+                        return false;
+                    } else {
+                        if (!isNaN(val) || !isNaN(val.charAt(0))) {
+                            $('#anResult').text("Hashtag should not contain Or Start With Number");
+                            return false;
+                        } else {
+                            var pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //unacceptable chars
+                            if (pattern.test(val)) {
+                                $('#anResult').text("Hashtag Contains Special Characters");
+                                return false;
+                            } else {
+                                $('#anResult').text("Hashtag is Valid");
+                                $('#popup-addhastag').hide();
+                                $(".spinner").show();
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        function deleteboard(boardid) {
+            var txt = '<%= Session["ID"].ToString() %>';
+            if (boardid !== txt) {
+                var r = confirm("Do You Want to Delete This Board?");
+                if (r == true) {
+                    //$('#popup-myboard').hide();
+                    PageMethods.BoardDelete(boardid, OnDelBoardSucess);
+                }
+            } else {
+                $('#mbResult').css('color', 'red');
+                $('#mbResult').text("Can't Delete Current Board! Select Another to Delete");
+            }
+        }
+        function OnDelBoardSucess(res) {
+            if (res == "Fail") {
+                $('#mbResult').css('color', 'red');
+                $('#mbResult').text("HashTag Deletion Failed!");
+            } else {
+                $('#mb-' + res).remove();
+                $('#mbResult').css('color', 'green');
+                $('#mbResult').text("HashTag Successfully Deleted!");
+            }
+        }
+    </script>
+
+    <div id="TopResult" runat="server"></div>
+ 
+    <div class="container">
+        <!-- menu -->
+        <nav>
+    <div class="side-logo">
+        <a href="Home.aspx"><img src="images/logo.png" alt="logo" /></a>
+    </div>
+    <div class="main-header">
+            <span>#</span>
+            <asp:Label runat="server" ID="MyboardName"></asp:Label>
+        </div>  
+      <div class="push-icon">
+    <img src="img/left-panel-icon.png" alt="Left Panel Icon" />
+    </div>
+    
+      <ul class="ca-menu">
+                  <li class="create-board-li">
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/createboard-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Create Board</h2>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="my-board-li">
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/myboard-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">My Boards</h2>
+                            </div>
+                        </a>
+                    </li>
+                     <li class="add-another-hastag">
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/hastag-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Another Hashtag</h2>
+                            </div>
+                        </a>
+                    </li>
+
+                       <li class="sort-by-platform-li">
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/select-by-platform.png" alt="Select By Platform" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Sort Content</h2>
+                            </div>
+        
+                        </a>
+                    </li>
+                   
+                     <%--<li class="sort-by-format-li">
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/sortbyformat-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Sort by Format</h2>
+                            </div>
+                        </a>
+                    </li>--%>
+                     <li>
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/boardanalytic-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">
+                                   <a id="analy" runat="server" href="Analytic.aspx" class="mylink">Board Analytics</a>
+                                </h2>
+                            </div>
+                        </a>
+                    </li>
+                      <li class="randomiser-li">
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/randomizer.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Randomiser</h2>
+                            </div>
+                        </a>
+                    </li>
+                    <%--<li>
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/compareboard-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Compare Boards</h2>
+                            </div>
+                        </a>
+                    </li>--%>
+
+                    <li class="exclude-li">
+                        <a href="#">
+                            <span class="ca-icon">
+                            <img src="images/exclude-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Exclude</h2>
+                            </div>
+                        </a>
+                    </li>
+                      <li>
+                        <a id="aSocial" runat="server" href="AddSocial.aspx">
+                            <span class="ca-icon">
+                              <img src="images/addsocial-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Add Social</h2>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <asp:LinkButton ID="Link1" OnClick="Link1_Click" runat="server">
+                            <span class="ca-icon">
+                            <img src="images/logout-icon.png" />
+                            </span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">LogOut</h2>
+                            </div>
+                        </asp:LinkButton>
+                    </li>
+
+                </ul>
+
+    </nav>
+
+
+    <%--CREATE BOARD  START--%>
+        <div id="popup-createborad" class="boxpanel effect" style="display: none;">
+            <div class="boxpanel-header">
+                <div class="boxpanel-hed-txt">
+                    Create Board
+                </div>
+                <div class="box-close-btn">
+                    <img src="images/popup-close.png" alt="closebtn" />
+                </div>
+            </div>
+            <div id="crResult" style="text-align:center;font-size:14px"></div>
+            <div class="boxpanel-bottom">
+            <div class="boxpanel-bottom-panel">
+                <div class="boxpanel-bottom-left">
+                    Board Name
+                </div>
+                <div class="boxpanel-bottom-right">
+                    <asp:TextBox ID="prBoard" CssClass="textbox" runat="server"></asp:TextBox>
+                </div>
+            </div>
+
+             <div class="boxpanel-bottom-panel">
+                <div class="boxpanel-bottom-left">
+                    Add Social
+                </div>
+                <div class="boxpanel-bottom-right">
+                    <div class="add-social-box">
+                        <asp:CheckBox ID="Check1" Checked="true" runat="server" />
+                        <img src="images/popup-fb.png" alt="facebook" />
+                    </div>
+                    <div class="add-social-box">
+                        <asp:CheckBox ID="Check2" Checked="true" runat="server" />
+                        <img src="images/popup-tw.png" alt="facebook" />
+                    </div>
+                   <%-- <div class="add-social-box">
+                        <asp:CheckBox ID="Check3" Checked="true" runat="server" />
+                        <img src="images/popup-pin.png" alt="facebook" />
+                    </div>--%>
+                    <div class="add-social-box">
+                        <asp:CheckBox ID="Check4" Checked="true" runat="server" />
+                        <img src="images/popup-in.png" alt="facebook" />
+                    </div>
+                </div>
+             </div>
+
+              <div class="boxpanel-bottom-panel">
+                <div class="boxpanel-bottom-left">
+                </div>
+                <div class="boxpanel-bottom-right">
+                    <asp:Button ID="Button1" OnClick="Button1_Click" CssClass="bluebtn" runat="server" Text="Create"/>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    <%--CREATE BOARD  END--%>        
+
+    <%--MY BOARD START--%>
+        <div id="popup-myboard" class="boxpanel effect" style="display: none;">
+            <div class="boxpanel-header">
+                <div class="boxpanel-hed-txt">
+                    My Board
+                </div>
+                <div class="box-close-btn">
+                    <img src="images/popup-close.png" alt="closebtn" />
+                </div>
+            </div>
+            <div id="mbResult" style="text-align:center;font-size:14px"></div>
+            <div class="boxpanel-bottom">
+                <asp:DataList RepeatDirection="Vertical" ID="Myboard" runat="server" OnItemCommand="Myboard_ItemCommand">
+                    <ItemTemplate>    
+                        <ul id='<%# "mb-"+ Eval("BoardID") %>'>
+                            <li>
+                            <img src="images/popup-board-icon.png" alt="Board" />                                
+                         <span> <asp:LinkButton ID="MyLink" CommandName="MyBoardLink" CommandArgument='<%#Eval("BoardID") %>' runat="server" CssClass="mylink"><%#Eval("BoardName") %></asp:LinkButton> </span>
+                                <a href="#" onclick="deleteboard('<%#Eval("BoardID") %>')"><img src="images/delete-box-icon.png" alt="Delete Keyword" /></a>
+                         <%--<asp:LinkButton ID="delBoard" CssClass="mar" CommandName="BoardDelete" CommandArgument='<%#Eval("BoardID") %>' runat="server"><img src="images/delete-box-icon.png" alt="Delete Keyword" /></asp:LinkButton>--%>
+                            </li>
+                        </ul>
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
+        </div>
+    <%--MY BOARD END--%>
+
+     <%--ADD ANOTHER HASTAG  START--%>
+        <div id="popup-addhastag" class="boxpanel effect" style="display: none;">
+            <div class="boxpanel-header">
+                <div class="boxpanel-hed-txt">
+                    Add Another # Tag
+                </div>
+                <div class="box-close-btn">
+                    <img src="images/popup-close.png" alt="closebtn" />
+                </div>
+            </div>
+            <div id="anResult" style="text-align:center;font-size:14px"></div>
+            <div class="boxpanel-bottom">
+             <div class="boxpanel-bottom-panel">
+                <div class="boxpanel-bottom-left">
+                    # Tag Name
+                </div>
+                <div class="boxpanel-bottom-right">
+                    <asp:TextBox ID="prExBoard" CssClass="textbox" runat="server"></asp:TextBox>
+                    &nbsp;&nbsp;
+                    <asp:Button ID="Button2" OnClick="Button2_Click" CssClass="bluebtn" runat="server" Text="Add" />
+                </div>
+                </div>
+                 
+                    <div class="key-hed">
+                    Tag List
+                </div>
+                <div class="key-list">
+                 <asp:DataList RepeatDirection="Vertical" ID="TagList" runat="server" CssClass="key" OnItemCommand="TagList_ItemCommand">
+                        <ItemTemplate>
+                         <ul>
+                           <li>
+                            <img src="images/popup-board-icon.png" alt="Board" />
+                                <span><asp:LinkButton ID="sortHash" CommandName="SortHash" CommandArgument='<%#Eval("HashTag") %>' runat="server"><%#Eval("HashTag") %></asp:LinkButton></span>
+                               <%--<a href="#" onclick="deleteboard('<%#Eval("HashTag") %>')"><img src="images/delete-box-icon.png" alt="Delete Keyword" /></a>--%>
+                                <asp:LinkButton ID="delhash" CssClass="mar" CommandName="HashDelete" CommandArgument='<%#Eval("HashTag") %>'  runat="server" 
+                                    OnClientClick="return confirm('Do You Want to Delete This Board?');"><img src="images/delete-box-icon.png" alt="Delete Keyword" /></asp:LinkButton>
+                            </li></ul>
+                        </ItemTemplate>
+                    </asp:DataList>
+                 
+                </div>
+            </div>
+        </div>
+    <%--ADD ANOTHER HASTAG  END--%>
+
+     <%--SHORT BY PLATFORM START--%>
+        <div id="popup-shortbyplatform" class="boxpanel effect" style="display: none;">
+            <div class="boxpanel-header">
+                <div class="boxpanel-hed-txt">
+                    Sort Content
+                </div>
+                <div class="box-close-btn">
+                    <img src="images/popup-close.png" alt="closebtn" />
+                </div>
+            </div>
+            <div class="boxpanel-bottom">
+                <div class="boxpanel-bottom-panel">
+                    <div class="boxpanel-bottom-left">
+                        Select Platform
+                    </div>
+                    <div class="boxpanel-bottom-right">
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="CBox1" runat="server" />
+                            <img src="images/popup-fb.png" alt="facebook" />
+                        </div>
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="CBox2" runat="server" />
+                            <img src="images/popup-tw.png" alt="twitter" />
+                        </div>
+                        <%--<div class="add-social-box">
+                        <asp:CheckBox ID="CheckBox7" runat="server" />
+                        <img src="images/popup-pin.png" alt="pinterest" />
+                    </div>--%>
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="CBox3" runat="server" />
+                            <img src="images/popup-in.png" alt="instagram" />
+                        </div>
+                    </div>
+                </div>
+                <div class="boxpanel-bottom-panel">
+                    <div class="boxpanel-bottom-left">
+                        Select Format
+                    </div>
+                    <div class="boxpanel-bottom-right">
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="CBox5" runat="server" />
+                            <img src="images/image-icon.png" alt="image" />
+                        </div>
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="CBox6" runat="server" />
+                            <img src="images/video-icon.png" alt="video" />
+                        </div>
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="CBox7" runat="server" />
+                            <img src="images/text-icon.png" alt="Text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="boxpanel-bottom-panel">
+                    <div class="boxpanel-bottom-left">
+                    </div>
+                    <div class="boxpanel-bottom-right">
+                        <asp:Button ID="Button3" OnClick="Button3_Click" CssClass="bluebtn mylink" runat="server"
+                            Text="View" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%--SHORT BY PLATFORM END--%>
+
+
+     <%--SHORT BY FORMAT START--%>
+        <div id="popup-shortbyformat" class="boxpanel effect" style="display: none">
+            <div class="boxpanel-header">
+                <div class="boxpanel-hed-txt">
+                    Sort By Format
+                </div>
+                <div class="box-close-btn">
+                    <img src="images/popup-close.png" alt="closebtn" />
+                </div>
+            </div>
+            <div class="boxpanel-bottom">
+                <div class="boxpanel-bottom-left">
+                    Select Format
+                </div>
+                <div class="boxpanel-bottom-right">
+                    <div class="add-social-box">
+                        <asp:CheckBox ID="CheckBox9" runat="server" />
+                        <img src="images/image-icon.png" alt="image" />
+                    </div>
+                    <div class="add-social-box">
+                        <asp:CheckBox ID="CheckBox10" runat="server" />
+                        <img src="images/video-icon.png" alt="video" />
+                    </div>
+                    <div class="add-social-box">
+                        <asp:CheckBox ID="CheckBox11" runat="server" />
+                        <img src="images/text-icon.png" alt="Text" />
+                    </div>
+                </div>
+                <div class="boxpanel-bottom-left">
+                </div>
+                <div class="boxpanel-bottom-right">
+                    <asp:Button ID="Button4" CssClass="bluebtn mylink" runat="server" Text="View" />
+                </div>
+            </div>
+        </div>
+    <%--SHORT BY PLATFORM END--%>
+
+    <%--RANDOMISER START--%>
+        <div id="popup-randomiser" class="boxpanel effect" style="display: none;">
+            <div class="boxpanel-header">
+                <div class="boxpanel-hed-txt">
+                    Randomiser
+                </div>
+                <div class="box-close-btn">
+                    <img src="images/popup-close.png" alt="closebtn" />
+                </div>
+            </div>
+            <div class="boxpanel-bottom">
+                <div class="boxpanel-bottom-panel">
+                    <div class="boxpanel-bottom-left">
+                        Select Platform
+                    </div>
+                    <div class="boxpanel-bottom-right">
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="ChBox1" runat="server" />
+                            <img src="images/popup-fb.png" alt="facebook" />
+                        </div>
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="ChBox2" runat="server" />
+                            <img src="images/popup-tw.png" alt="twitter" />
+                        </div>
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="ChBox3" runat="server" />
+                            <img src="images/popup-in.png" alt="instagram" />
+                        </div>
+                    </div>
+                </div>
+                <div class="boxpanel-bottom-panel">
+                    <div class="boxpanel-bottom-left">
+                        Select Format
+                    </div>
+                    <div class="boxpanel-bottom-right">
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="ChBox4" runat="server" />
+                            <img src="images/image-icon.png" alt="image" />
+                        </div>
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="ChBox5" runat="server" />
+                            <img src="images/video-icon.png" alt="video" />
+                        </div>
+                        <div class="add-social-box">
+                            <asp:CheckBox ID="ChBox6" runat="server" />
+                            <img src="images/text-icon.png" alt="Text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="boxpanel-bottom-panel">
+                    <div class="boxpanel-bottom-left">
+                        Select Number
+                    </div>
+                    <div class="boxpanel-bottom-right">
+                        <asp:DropDownList ID="Drop1" runat="server">
+                            <asp:ListItem Value="5">Top 5</asp:ListItem>
+                            <asp:ListItem Value="10">Top 10</asp:ListItem>
+                            <asp:ListItem Value="15">Top 15</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="boxpanel-bottom-panel">
+                    <div class="boxpanel-bottom-left">
+                    </div>
+                    <div class="boxpanel-bottom-right">
+                        <asp:Button ID="Button6" OnClick="Button6_Click" CssClass="bluebtn mylink" runat="server"
+                            Text="View" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%--RANDOMIZER END--%>
+
+    <%--EXCLUDE START--%>
+        <div id="popup-Exclude" class="boxpanel effect" style="display: none;">
+            <div class="boxpanel-header">
+                <div class="boxpanel-hed-txt">Exclude</div>
+                <div class="box-close-btn">
+                    <img src="images/popup-close.png" alt="closebtn" />
+                </div>
+            </div>
+            <div id="exResult" style="text-align:center;font-size:14px"></div>
+            <div class="boxpanel-bottom">
+                <div class="boxpanel-bottom-left">Keyword name</div>
+                <div class="boxpanel-bottom-right">
+                    <asp:TextBox ID="KeyText" CssClass="textbox" runat="server"></asp:TextBox>
+                    &nbsp;&nbsp;
+                    <span ID="Keyword" style="cursor:pointer" class="bluebtn" runat="server">Add</span>
+                    <br />  
+                    &nbsp;&nbsp;
+                    <a style="cursor:pointer" href="Home.aspx" class="bluebtn mylink" runat="server">Submit</a>
+                </div>
+                <p>&nbsp;</p>
+                <div class="key-hed">Keyword List</div>
+                <div id="KeyList" runat="server" class="key-list">
+                            <%--<table id="DataDel" class="key" cellspacing="0" style="border-collapse:collapse;"></table>
+                                <ul id='<%#"KI-"+Eval("KeyID") %>'>
+                                <li><img src="images/popup-board-icon.png" alt="Board" /><span><%#Eval("Keywords") %></span>                                    
+                                    <a href="#" alt='<%#Eval("KeyID") %>' class="DelExclude"><img src="images/delete-box-icon.png" alt="Delete Keyword" /></a>
+                                </li>
+                            </ul>--%>
+                </div>
+            </div>
+        </div>
+        <%--EXCLUDE START--%>
+        <div class="right">
+	        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

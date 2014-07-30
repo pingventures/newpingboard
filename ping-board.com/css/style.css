@@ -1,0 +1,325 @@
+html body {
+    background:#333;
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+/*  MAIN CSS START HERE*/
+.leftpanel {
+	width: 100px;
+	position: fixed;
+	height: 100%;
+	z-index: 1200;
+}
+.leftpanelUp {
+	width: 100px;
+	position: fixed;
+	height: 100%;
+	margin-top: 95px;
+	float: left;
+	display: block;
+	background: url(../images/left-panel.png) no-repeat;
+}
+.leftpanelDown {
+	width: 100px;
+	position: absolute;
+	height: 100%;
+	top: 86%;
+	bottom: 0px;
+	z-index: 1000;
+	background: url(../images/left-panelDown.png) no-repeat;
+}
+.rightpanel {
+	width: 100%;
+	height: 100% !important;
+	float: right;
+	display: block;
+}
+.header {
+	height: 80px;
+	background: url(../images/hed-bck.png) repeat-x;
+	position: fixed;
+	width: 100%;
+	z-index: 1300;
+	margin: 0px;
+	padding: 0px;
+}
+.headerright {
+	float: right;
+	width: 200px;
+}
+input.textbox {
+	background: white;
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #DDD inset;
+	color: #666;
+	float: left;
+	padding: 5px 10px;
+	width: 165px;
+	outline: none;
+}
+.headermid {
+	float: left;
+	margin: 30px 30px 0px 130px;
+}
+.tab {
+	background:rgba(88,195,186,.2);
+	float: left;
+	margin: 43px 5px 0px 5px;
+	border-radius: 8px 8px 0px 0px;
+	padding: 7px 10px;
+	font-size: 12px;
+	color: #000;
+	font-weight: 600;
+}
+.tab a {
+    color:#000 !important;}
+.tab a:hover{ color:#000 !important;}
+.selected {
+	background: #58c3ba;
+	color: #fff;
+}
+.menu {
+	width: 100px;
+	height: 30px;
+	font-size: 12px;
+	color: #fff;
+}
+/*LEFT SECTION STYLE*/  
+.saveicon img {
+	padding: 10px 11px 0px 19px;
+	cursor: pointer;
+}
+.compareicon img {
+	padding: 10px 11px 0px 19px;
+	cursor: pointer;
+}
+.facebookicon img {
+	padding: 10px 11px 0px 19px;
+	cursor: pointer;
+}
+.twittericon img {
+	padding: 0px 11px 0px 19px;
+	cursor: pointer;
+}
+.gplusicon img {
+	padding: 0px 11px 01px 19px;
+	cursor: pointer;
+}
+.youtubeicon img {
+	padding: 0px 11px 11px 19px;
+	cursor: pointer;
+}
+.facebookicon img a {
+	cursor: pointer;
+}
+.facebookicon img a:hover {
+	padding: 20px;
+}
+.numberbox {
+	position: absolute;
+	background: url(../images/left-over.png) no-repeat;
+	display: none;
+	float: left;
+	width: 35px;
+	height: 29px;
+	margin: -15px 20px 20px 65px;
+	z-index: 1200px;
+}
+.numberbox span {
+	padding: 0px 20px 0px 17px;
+	font-size: 11px;
+	color: #fff;
+}
+.numberbox1 {
+	position: absolute;
+	background: url(../images/left-over.png) no-repeat;
+	display: none;
+	float: left;
+	margin: -20px 20px 20px 65px;
+	width: 35px;
+	height: 29px;
+}
+.numberbox1 span {
+	padding: 0px 20px 0px 17px;
+	font-size: 11px;
+	color: #fff;
+}
+.numberbox2 {
+	position: absolute;
+	background: url(../images/left-over.png) no-repeat;
+	display: none;
+	float: left;
+	width: 35px;
+	height: 29px;
+	margin: -15px 20px 20px 65px;
+}
+.numberbox2 span {
+	padding: 0px 20px 0px 17px;
+	font-size: 11px;
+	color: #fff;
+}
+.numberbox3 {
+	position: absolute;
+	background: url(../images/left-over.png) no-repeat;
+	display: none;
+	float: left;
+	width: 35px;
+	margin: -15px 20px 20px 65px;
+	height: 29px;
+}
+.numberbox3 span {
+	padding: 0px 20px 0px 17px;
+	font-size: 11px;
+	color: #fff;
+}
+/*LEFT SECTION STYLE*/
+
+.logo {
+	float: left;
+}
+.logo img {
+	padding: 2px 10px 10px 10px
+}
+#box {
+	width: 140px;
+	height: 140px;
+	border: 1px solid #ccc;
+	transition: width 2s;
+	transition: height 2s;
+}
+.brick {
+	width: 140px;
+	background: rgba(233,239,246,.3);
+	border: 1px solid;
+	border-color: rgba(233,239,246,.4);
+	border-radius: 3px;
+	transition: width 2s;
+	transition: height 2s;
+}
+.brick.clicked {
+	width: 300px;
+	height: 300px;
+}
+.pingbtn {
+	background-color: #3bb3e0;
+	padding: 5px 10px;
+	position: relative;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	color: #fff;
+	border: solid 1px #186f8f;
+	background-image: linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+	background-image: -webkit-gradient(  linear,  left bottom,  left top,  color-stop(0, rgb(44,160,202)),  color-stop(1, rgb(62,184,229))  );
+	-webkit-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff !important;
+	-moz-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff !important;
+	box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff !important;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+		-moz-box-sizing: inherit !important;
+	  -webkit-box-sizing: inherit !important;
+          box-sizing:inherit !important;
+	
+}
+.pingbtn::before {
+	background-color: #ccd0d5;
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	padding: 8px;
+	left: -8px;
+	top: -8px;
+	z-index: -1;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff !important;
+	-moz-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff !important;
+	-o-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff !important;
+	box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff !important;
+	-moz-box-sizing: content-box !important;
+	-webkit-box-sizing: content-box !important;
+     box-sizing:content-box !important;
+	
+}
+.pingbtn:active {
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	top: 1px;
+	background-image: linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -webkit-gradient(  linear,  left bottom,  left top,  color-stop(0, rgb(62,184,229)),  color-stop(1, rgb(44,160,202))  );
+}
+.imgarea {
+	float: left;
+	display: block;
+	margin: 0px 3px 3px 0px;
+	height: auto;
+}
+.imgarea img {
+	width: 100%;
+	border-radius:6px;
+	margin: 1px;
+}
+.txtxarea {
+	height: 200px;
+	position: relative;
+	height: auto;
+	float: left;
+	margin: 3px;
+	color: #000;
+	font-family: Calibri;
+	font-size: 13px;
+}
+.socialarea {
+	width: 190px;
+	background: rgba(233,239,246,.3);
+	float: left;
+	display: block;
+	margin: 3px 3px 0px 0px;
+}
+.socialarea img {
+	float: left;
+	margin: 3px 0px 0px 0px;
+}
+.socialarea .txt {
+	font-size: 12px;
+	float: left;
+	color: #000;
+	margin-bottom: 5px;
+}
+.likesec {
+	float: right;
+	padding: 7px 10px 3px 0px;
+}
+.likesec img {
+	margin: 0px 4px;
+}
+
+
+/* jQuery Gridly
+ * Copyright 2013 Kevin Sylvestre
+ *  1.1.4
+ */
+.gridly, .gridly > :not(.dragging) {
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out; }
+/*.gridly .dragging {
+  z-index: 800; }*/
