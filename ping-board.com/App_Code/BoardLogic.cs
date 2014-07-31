@@ -607,7 +607,7 @@ public static class BoardLogic
                             }
                             if (uPic != "")
                             {
-                                BoardAccess.InsertContent("", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
+                                BoardAccess.InsertContent("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
                                     tweet.Text, uPic, "Twitter", "Photo", Convert.ToString(tweet.Id),
                                     Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", Convert.ToString(msgDate), "True",
                                     hash, sentiment, loc);
@@ -615,7 +615,7 @@ public static class BoardLogic
                                 {
                                     string check = InsertLays("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
                                     tweet.Text, uPic, "Twitter", "Photo", Convert.ToString(tweet.Id),
-                                    Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert",msgDate, "True",
+                                    Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", msgDate, "True",
                                     hash, sentiment, loc);
                                 }
                             }
@@ -632,7 +632,7 @@ public static class BoardLogic
                                 }
                                 if (ur != "")
                                 {
-                                    BoardAccess.InsertContent("", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
+                                    BoardAccess.InsertContent("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
                                     tweet.Text, ur, "Twitter", "Video", Convert.ToString(tweet.Id),
                                     Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", Convert.ToString(msgDate),
                                     "True", hash, sentiment, loc);
@@ -640,7 +640,7 @@ public static class BoardLogic
                                 }
                                 else
                                 {
-                                    BoardAccess.InsertContent("", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
+                                    BoardAccess.InsertContent("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
                                     tweet.Text, "", "Twitter", "Content", Convert.ToString(tweet.Id),
                                     Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", Convert.ToString(msgDate),
                                     "True", hash, sentiment, loc);
