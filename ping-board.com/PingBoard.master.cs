@@ -197,7 +197,7 @@ public partial class PingBoard : System.Web.UI.MasterPage
 
                             string hashtag = dt1.Rows[0]["BoardName"].ToString();
                             string[] tothash = hashtag.Split('-');
-                            if (tothash.Length < 5)
+                            if (tothash.Length < 6)
                             {
                                 int flag = 0;
                                 foreach (string word in tothash)
