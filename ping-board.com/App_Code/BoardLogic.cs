@@ -607,16 +607,19 @@ public static class BoardLogic
                             }
                             if (uPic != "")
                             {
-                                BoardAccess.InsertContent("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
+
+                                if (BoardAccess.InsertContent("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
                                     tweet.Text, uPic, "Twitter", "Photo", Convert.ToString(tweet.Id),
                                     Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", Convert.ToString(msgDate), "True",
-                                    hash, sentiment, loc);
-                                if (boardid == "66")
+                                    hash, sentiment, loc))
                                 {
-                                    string check = InsertLays("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
-                                    tweet.Text, uPic, "Twitter", "Photo", Convert.ToString(tweet.Id),
-                                    Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", msgDate, "True",
-                                    hash, sentiment, loc);
+                                    if (boardid == "66")
+                                    {
+                                        string check = InsertLays("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
+                                        tweet.Text, uPic, "Twitter", "Photo", Convert.ToString(tweet.Id),
+                                        Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", msgDate, "True",
+                                        hash, sentiment, loc);
+                                    }
                                 }
                             }
                         }
@@ -662,16 +665,18 @@ public static class BoardLogic
                         }
                         if (uPic != "")
                         {
-                            BoardAccess.InsertContent("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
+                            if (BoardAccess.InsertContent("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
                                 tweet.Text, uPic, "Twitter", "Photo", Convert.ToString(tweet.Id),
                                 Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", Convert.ToString(msgDate), "True",
-                                hash, sentiment, loc);
-                            if (boardid == "66")
+                                hash, sentiment, loc))
                             {
-                                string check = InsertLays("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
-                                tweet.Text, uPic, "Twitter", "Photo", Convert.ToString(tweet.Id),
-                                Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", msgDate, "True",
-                                hash, sentiment, loc);
+                                if (boardid == "66")
+                                {
+                                    string check = InsertLays("0", boardid, cust.ScreenName, cust.Name, cust.ProfileImageUrl,
+                                    tweet.Text, uPic, "Twitter", "Photo", Convert.ToString(tweet.Id),
+                                    Convert.ToString(tweet.RetweetCount), Convert.ToString(tweet.FavouriteCount), "0", "Insert", msgDate, "True",
+                                    hash, sentiment, loc);
+                                }
                             }
                         }
                     }
